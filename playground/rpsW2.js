@@ -10,10 +10,10 @@ let playChoice, gameChoice
 
 
 //This function was heavyly inspried by https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-//Refactor to work in my RPS game 
-
+//Refactordc to work in my RPS game 
 
 //This function randomly selects a interger from 0 to 2 
+
 //Math.ceil -  function always rounds a number up to the next largest whole number or integer.
 //Math.floor -  function returns the largest integer less than or equal to a given number.
 //Math.random - function returns a floating-point, pseudo-random number in the range 0–1 
@@ -27,7 +27,7 @@ const getRandomInt = function () {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-//Convert Choice Intergar to Game String 
+//Convert Choice Interger to Game String 
 
 const convertToRPS = function (choiceInt) {
     if (choiceInt === 0) {
@@ -39,7 +39,10 @@ const convertToRPS = function (choiceInt) {
     }
 }
 
-//Get Rock Scissors Paper game results and return as String, refactored nested if statments to decrease number of comparsion operations. 
+/* Get Rock Scissors Paper game results and return as String, refactored to nested if statments to decrease number of comparsion operations. */ 
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment
+//The increment operator increments (adds one to) its operand and returns a value.
+
 
 const getRPSResults = function (playerChoice, gameChoice) {
     playerTotalGames++
