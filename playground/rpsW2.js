@@ -6,6 +6,8 @@ let playerTotalGames = 0
 let playerTotalWins = 0
 let gameTotalWins = 0
 
+let playChoice, gameChoice
+
 
 //This function was heavyly inspried by https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 //Refactor to work in my RPS game 
@@ -93,28 +95,22 @@ const getGameSelection = function () {
     return convertToRPS(gameChoiceInt)
 }
 
+const playGame = function() {
+    playerChoice = getPlayerSelection()
+    gameChoice = getGameSelection()
+    console.log(getRPSResults(playerChoice, gameChoice))
+    gameOutput()
+}
+
 
 //Play Game 1
-let playerChoice = getPlayerSelection()
-let gameChoice = getGameSelection()
-console.log(getRPSResults(playerChoice, gameChoice))
-gameOutput()
+playGame()
 
 //Play Game 2
-playerChoice = getPlayerSelection()
-gameChoice = getGameSelection()
-console.log(getRPSResults(playerChoice, gameChoice))
-gameOutput()
+playGame()
 
 //Play Game 3
-playerChoice = getPlayerSelection()
-gameChoice = getGameSelection()
-console.log(getRPSResults(playerChoice, gameChoice))
-gameOutput()
+playGame()
 
 //Play Game 4
-playerChoice = getPlayerSelection()
-gameChoice = getGameSelection()
-console.log(getRPSResults(playerChoice, gameChoice))
-gameOutput()
-
+playGame()
