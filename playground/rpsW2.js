@@ -12,6 +12,13 @@ let playChoice, gameChoice
 //This function was heavyly inspried by https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 //Refactor to work in my RPS game 
 
+
+//This function randomly selects a interger from 0 to 2 
+//Math.ceil -  function always rounds a number up to the next largest whole number or integer.
+//Math.floor -  function returns the largest integer less than or equal to a given number.
+//Math.random - function returns a floating-point, pseudo-random number in the range 0–1 
+//According to MDN this would be a inclusive getRandom function 
+
 const getRandomInt = function () {
     let min = 0
     let max = 2
