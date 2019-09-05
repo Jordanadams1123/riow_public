@@ -1,3 +1,5 @@
+//This code will take the input of a person, goal and current activity and duration
+//to increase the total number of workout minutes and total calories burned.
 
 let person = 'Rio Waller'
 let goal = 'Loss 25 pounds'
@@ -13,8 +15,12 @@ let currentActivity = 'running'
 let currentActivityDuration = 15
 
 
-//Session Activity
+//Add current acitivty duration to total workout minutes
+
 totalWorkOutMins = totalWorkOutMins + currentActivityDuration
+
+//Determine activity and then multiply current activity duration and a factor 
+//to increase the total calories burned. 
 
 if(currentActivity === activity_1) {    
     totalCaloriesBurned = totalCaloriesBurned + (currentActivityDuration * 25)
@@ -25,7 +31,7 @@ if(currentActivity === activity_1) {
 } else {
     console.log('You did not select a activity we track')
 }
-
+//Display user output
 
 console.log(person + ' ' + ' has a goal of ' + goal + '.')
 console.log('The current activity is ' + currentActivity + ' and has been done for ' + currentActivityDuration + '.')
