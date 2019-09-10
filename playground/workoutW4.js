@@ -2,8 +2,7 @@ const appName = 'My Working App'
 const developer = 'Rio Waller'
 const version = 3.45
 
-
-let person_1 = {
+const person_1 = {
     name: 'Rio Waller',
     goal: 'Lose 25 pounds',
     totalCal: 0,
@@ -11,7 +10,7 @@ let person_1 = {
     activityDetail: []
 }
 
-let person_2 = {
+const  person_2 = {
     name: 'Jack Smith',
     goal: 'Run a half martathon',
     totalCal: 0,
@@ -20,7 +19,7 @@ let person_2 = {
 }
 
 const saveActivityData = function (person, activity, duration) {
-
+    console.log('this is the person being passed into the functinon' + person)
     let calories = 0
     if (activity === 'running') {
         calories = duration * 25
@@ -34,6 +33,7 @@ const saveActivityData = function (person, activity, duration) {
 }
 
 const getActivitySummary = function (person) {
+    
     let totalCal = 0
     let totalMin = 0
     person.activityDetail.forEach(function (activity) {
@@ -73,6 +73,9 @@ const getDailyInspriation = function (person) {
 
 saveActivityData(person_1, 'running', 20)
 saveActivityData(person_1, 'lifting', 35)
+
+saveActivityData(person_2, 'lifting', 30)
+
 displayPersonData(person_1)
 getActivitySummary(person_1)
 getEatOutDecision(person_1)
