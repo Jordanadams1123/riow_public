@@ -83,22 +83,22 @@ const getRPSResult = function (player, gameChoice, playerChoice) {
     }
     if (playerChoice === 'Rock') {
         if (gameChoice === 'Scissors') {
-            gamePlayDetail.push({ id: id, player: player, result: 'Win', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Win', playerChoice, gameChoice })
             updateStore()
             return 'Rock beats Scissors - Player Wins'
         } else {
-            gamePlayDetail.push({ id: id, player: player, result: 'Loss', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Loss', playerChoice, gameChoice })
             updateStore()
             return 'Scissors beats Paper - Game Wins'
         }
     }
     if (playerChoice === 'Paper') {
         if (gameChoice === 'Rock') {
-            gamePlayDetail.push({ id: id, player: player, result: 'Win', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Win', playerChoice, gameChoice })
             updateStore()
             return 'Paper beats Rock - Player Wins'
         } else {
-            gamePlayDetail.push({ id: id, player: player, result: 'Loss', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Loss', playerChoice, gameChoice })
             updateStore()
             return 'Scisster cuts Paper - Game Wins'
         }
@@ -106,11 +106,11 @@ const getRPSResult = function (player, gameChoice, playerChoice) {
 
     if (playerChoice === 'Scissors') {
         if (gameChoice === 'Paper') {
-            gamePlayDetail.push({ id: id, player: player, result: 'Win', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Win', playerChoice, gameChoice })
             updateStore()
             return 'Scissors Cut Paper - Player Wins'
         } else {
-            gamePlayDetail.push({ id: id, player: player, result: 'Loss', playerChoice, gameChoice })
+            gamePlayDetail.push({ player: player, result: 'Loss', playerChoice, gameChoice })
             updateStore()
             return 'Rock crushes Scissors - Game Wins'
         }
