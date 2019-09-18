@@ -19,6 +19,7 @@ const  person_2 = {
 }
 
 const saveActivityData = function (person, activity, duration) {
+    
     console.log('this is the person being passed into the functinon' + person)
     let calories = 0
     if (activity === 'running') {
@@ -79,4 +80,4 @@ saveActivityData(person_2, 'lifting', 30)
 displayPersonData(person_1)
 getActivitySummary(person_1)
 getEatOutDecision(person_1)
-
+console.log(person_1.activityDetail)
