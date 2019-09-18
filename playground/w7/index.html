@@ -5,26 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Week 6 Learn Together</title>
+    <title>Week 7 Learn Together</title>
 </head>
 
 <body>
     <h1>Play Rock Scissors Paper</h1>
     <label for="">Player name: <input id="player-name" type="text"></label>
+    <div id="current-player"></div>
     <div id="player-input-err"></div>
-    <div>
+    <div id="game-play">
         <img src="/img/scissors.jpg" id="click-scissors" alt="">
         <img src="/img/rock.jpg" id="click-rock" alt="">
         <img src="/img/paper.jpg" id="click-paper" alt="">
     </div>
     <div id="rps-output"></div>
     <hr />
-    <h1>Game Play Detail</h1>
-    <input type="text" id="select-player" placeholder="Select a Player">
-    <div id="game-search"></div>
+    <!-- <h1>Game Play Detail</h1>
+    <input type="text" id="select-player" placeholder="Select a Player"> -->
+    <div id="game-history"></div>
     <div id="player-output"></div>
-    <script src="js/rps.js"></script>
-    <!-- <script src="js/app.js"></script> -->
+    <script src="js/uuid.js"></script>
+    <script src="js/rps-functions.js"></script>
+    <script src="js/rps-app.js"></script>
+   
 </body>
 
 </html>
