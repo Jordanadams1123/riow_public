@@ -14,7 +14,7 @@ let gamePlayDetail = getSavedGameDetail()
 
 scissorsClick.addEventListener('click', function (e) {
     if(player === '') {
-        playerInputErr.textContent = 'Player Name required to play'
+        playerInputErr.textContent = 'HEY!!!! CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Scissors')
     }
@@ -22,7 +22,7 @@ scissorsClick.addEventListener('click', function (e) {
 
 paperClick.addEventListener('click', function (e) {
     if(player === '') {
-        playerInputErr.textContent = 'Player Name required to play'
+        playerInputErr.textContent = 'HEY....CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Paper')
     }
@@ -30,7 +30,7 @@ paperClick.addEventListener('click', function (e) {
 
 rockClick.addEventListener('click', function (e) {
     if(player === '') {
-        playerInputErr.textContent = 'Player Name required to play'
+        playerInputErr.textContent = 'HEY....CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Rock')
     }
@@ -38,7 +38,7 @@ rockClick.addEventListener('click', function (e) {
 
 playerName.addEventListener('change', function(e){
     if(e.target.value === '') {
-        playerInputErr.textContent = 'Player Name required'
+        playerInputErr.textContent = `HEY....CAN YOU READ? Enter PLAYER NAME TO START!`
     } else {
         player = e.target.value.toLowerCase()
         e.target.value = ''
