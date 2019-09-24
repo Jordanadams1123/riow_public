@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Week 8 Learn Together</title>
+    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="flex-container wrapper">
+        <header>
+            <h1>Play <span style="color: #f0547d;">Rock</span> <span style="color:#80d0de;"> Scissors</span> <span
+                    style="color:#fada5c;"> Paper</span></h1>
+
+            <label for="">To start enter PLAYER name: <input id="player-name" type="text"></label>
+        </header>
+        <hr />
+        <section class="content">
+            <div id="current-player"></div>
+            <div id="player-input-err"></div>
+            <div id="game-play">
+                <img src="img/rock.jpg" id="click-rock" alt="">
+                <img src="img/scissors.jpg" id="click-scissors" alt="">
+                <img src="img/paper.jpg" id="click-paper" alt="">
+            </div>
+
+        </section>
+        <section class="sidebar" id="rps-output"></section>
+        <hr />
+
+        <section class="hero">
+            <div id="game-history"></div>
+            <div id="player-output"></div>
+        </section>
+        <footer>Developer - Rio Waller</footer>
+        <script src="js/uuid.js"></script>
+        <script src="js/rps-functions.js"></script>
+        <script src="js/rps-app.js"></script>
+    </main>
+</body>
+
+</html>
