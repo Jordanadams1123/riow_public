@@ -11,6 +11,6 @@ as of Week 8 Learn Together
 - [ ] Refactor shorten syntax with arrow function
 - [ ] Get review by player working
 - [ ] Add date and time to gamePlayDetail
-- [ ] Implement game review
+- [ ] Implement game review - remove
 - [ ] Review DRY
 
