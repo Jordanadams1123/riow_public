@@ -1,3 +1,5 @@
+'use strict'
+
 const gameId = location.hash.substring(1)
 const games = getSavedGameDetail()
 const game = games.find(function(game){
@@ -19,10 +21,10 @@ link.setAttribute('href', 'index.html#' + game.player)
 link.textContent = 'Return to Game'
 gameDetail.appendChild(link)
 
-console.log(document.getElementsByName('rate'))
+//console.log(document.getElementsByName('rate'))
 
 
-document.getElementById('review').addEventListener('click', function () {
+document.getElementById('review').addEventListener('click', () => {
     let reviewStars = document.getElementsByName('rate')
     reviewStars.forEach(function (star) {
         if (star.checked) {

@@ -1,29 +1,32 @@
+'use strict'
 
 const filters = {
     playerText: '',
     byGame: ''
 }
 
-const getSavedGameDetail = function () {
+const getSavedGameDetail = () => {
+
     const gamePlayDetailJSON = localStorage.getItem('rps')
-    if (gamePlayDetailJSON !== null) {
-       return JSON.parse(gamePlayDetailJSON)
-    } else {
+    try {
+        return gamePlayDetailJSON ?  JSON.parse(gamePlayDetailJSON) : []
+    } catch (e){
         return []
-    }
+    }  
+   
 }
 
 //Render Game filter results by filtered by Player
-const renderSearchDetail = function(filterPlayer, filters) {
+const renderSearchDetail = (filterPlayer, filters) => {
     playerOutput.innerHTML = ''
-    const filterGame = filterPlayer.filter(function (detail){
+    const filterGame = filterPlayer.filter((detail) => {
         return detail.result.toLowerCase().includes(filter.byGame.toLowerCase()) 
     })
 
     if(filterGame.length === 0) {
         gameSearch.textContent = 'No Games found'
     } else {
-        filterGame.forEach(function(game){
+        filterGame.forEach((game) => {
             const gameEntry = document.createElement('p')
             gameEntry.textContent = `Player ${game.player} ${game.result} by selecting ${game.playerChoice}.`
             playerOutput.appendChild(gameEntry)
@@ -32,8 +35,8 @@ const renderSearchDetail = function(filterPlayer, filters) {
 
 }
 
-const removeGameEntry = function (id) {
-    const gameIndex = gamePlayDetail.findIndex(function (game){
+const removeGameEntry = (id) => {
+    const gameIndex = gamePlayDetail.findIndex((game) => {
         return game.id === id   
     })
     if(gameIndex > -1) {
@@ -45,7 +48,7 @@ const saveGamePlayDetail = function (gamePlayDetail) {
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
 }
 
-const generateGameDOM = function(game, index) {
+const generateGameDOM = (game, index) => {
     const gameEl = document.createElement('div')
     const playEntry = document.createElement('p')
     playEntry.textContent = `Game ${index+1}: Player ${game.player} ${game.result} by selecting ${game.playerChoice}.`
@@ -53,7 +56,7 @@ const generateGameDOM = function(game, index) {
     const removeGameButton = document.createElement('button')
     removeGameButton.textContent = 'x'
     playEntry.appendChild(removeGameButton)
-    removeGameButton.addEventListener('click', function(){
+    removeGameButton.addEventListener('click', () => {
         removeGameEntry(game.id)
         saveGamePlayDetail(gamePlayDetail)
         renderGameDetail(gamePlayDetail, filters, player)  
@@ -70,7 +73,7 @@ const generateGameDOM = function(game, index) {
 
 }
 
-const createPlayerHistoryDOM = function(filterPlayer, filters, player) {
+const createPlayerHistoryDOM = (filterPlayer, filters, player)=> {
     const div = document.createElement('div')
     
     const h1 = document.createElement('h1')
@@ -79,10 +82,10 @@ const createPlayerHistoryDOM = function(filterPlayer, filters, player) {
     
     const h2 = document.createElement('h2')
     const totalGames = filterPlayer.length
-    const filterWins = filterPlayer.filter(function (game){
+    const filterWins = filterPlayer.filter((game) => {
         return game.result === 'Win'
     })
-    const filterLoss = filterPlayer.filter(function(game){
+    const filterLoss = filterPlayer.filter((game) => {
         return game.result === 'Loss'
     })
     const totalWins = filterWins.length
@@ -96,9 +99,9 @@ const createPlayerHistoryDOM = function(filterPlayer, filters, player) {
 
 
 //Render Player detail 
-const renderGameDetail = function(gamePlayDetail, filters, player) {
+const renderGameDetail = (gamePlayDetail, filters, player) => {
     
-    const filterPlayer = gamePlayDetail.filter(function (detail){     
+    const filterPlayer = gamePlayDetail.filter((detail) => {     
         return detail.player === player
     })
     
@@ -110,7 +113,7 @@ const renderGameDetail = function(gamePlayDetail, filters, player) {
         let playerHistoryEl = createPlayerHistoryDOM(filterPlayer, filters, player)
         playerHistory.appendChild(playerHistoryEl)
 
-        filterPlayer.forEach(function(game, index) {
+        filterPlayer.forEach((game, index) => {
             let playEntryEl = generateGameDOM(game, index)
             playerHistory.appendChild(playEntryEl)
         })
@@ -118,11 +121,11 @@ const renderGameDetail = function(gamePlayDetail, filters, player) {
     }
 } 
 
-const getRandomInterger = function (min, max) {
+const getRandomInterger =  (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-const getGameChoice = function (choiceInt) {
+const getGameChoice = (choiceInt) => {
     if (choiceInt === 0) {
         return 'Rock'
     } else if (choiceInt === 2) {
@@ -132,13 +135,13 @@ const getGameChoice = function (choiceInt) {
     }
 }
 
-const updateStore = function(player, result, playerChoice, gameChoice) {
+const updateStore = (player, result, playerChoice, gameChoice) => {
     const id = uuidv4()
     gamePlayDetail.push({ id, player, result, playerChoice, gameChoice })
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
 }
 
-const getRPSResult = function (player, gameChoice, playerChoice) {
+const getRPSResult = (player, gameChoice, playerChoice) => {
   
     if (playerChoice === gameChoice) {
         updateStore(player, 'Tie', playerChoice, gameChoice)
@@ -174,7 +177,7 @@ const getRPSResult = function (player, gameChoice, playerChoice) {
     }
 }
 
-const playGame = function (player, playerChoice) {
+const playGame = (player, playerChoice) => {
     rpsOutput.innerHTML = ''
     let gameChoice = getGameChoice(getRandomInterger(0, 2))
     let result = getRPSResult(player, gameChoice, playerChoice)

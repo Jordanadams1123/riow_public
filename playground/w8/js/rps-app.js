@@ -1,3 +1,4 @@
+'use strict'
 const playerName = document.getElementById('player-name')
 const playerInputErr = document.getElementById('player-input-err')
 const scissorsClick = document.getElementById('click-scissors')
@@ -8,16 +9,16 @@ const playerHistory = document.getElementById('game-history')
 const playerOutput = document.getElementById('player-output')
 const currentPlayer = document.getElementById('current-player')
 
-
+let player 
 
 let gamePlayDetail = getSavedGameDetail()
 
 const linkedPlayer = location.hash.substring(1)
 console.log(linkedPlayer)
 if(!linkedPlayer){
-    let player = ''
+    player = ''
 } else {
-    let player = linkedPlayer
+    player = linkedPlayer
     const h2 = document.createElement('h2')
     h2.textContent = `${player} is now playing`
     currentPlayer.appendChild(h2)
