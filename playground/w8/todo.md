@@ -8,6 +8,9 @@ as of Week 8 Learn Together
 - [x] Implemented player basic statistics
 - [x] Implement try catch for reading local storage
 - [x] Refactor function into arrow functions
+- [ ] Refactor shorten syntax with arrow function
 - [ ] Get review by player working
 - [ ] Add date and time to gamePlayDetail
-- [ ] Implement game review 
+- [ ] Implement game review
+- [ ] Review DRY
+

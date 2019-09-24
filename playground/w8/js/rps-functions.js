@@ -5,6 +5,7 @@ const filters = {
     byGame: ''
 }
 
+//get data from local storage
 const getSavedGameDetail = () => {
 
     const gamePlayDetailJSON = localStorage.getItem('rps')
@@ -35,6 +36,7 @@ const renderSearchDetail = (filterPlayer, filters) => {
 
 }
 
+//remove game detail entry by id
 const removeGameEntry = (id) => {
     const gameIndex = gamePlayDetail.findIndex((game) => {
         return game.id === id   
@@ -44,10 +46,12 @@ const removeGameEntry = (id) => {
     }
 }
 
-const saveGamePlayDetail = function (gamePlayDetail) {
+//save chagnes to local storage
+const saveGamePlayDetail = (gamePlayDetail) => {
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
 }
 
+//generate game play detail DOM element
 const generateGameDOM = (game, index) => {
     const gameEl = document.createElement('div')
     const playEntry = document.createElement('p')
@@ -73,6 +77,7 @@ const generateGameDOM = (game, index) => {
 
 }
 
+//Create Player History DOM by filtering for statistics
 const createPlayerHistoryDOM = (filterPlayer, filters, player)=> {
     const div = document.createElement('div')
     
@@ -95,7 +100,6 @@ const createPlayerHistoryDOM = (filterPlayer, filters, player)=> {
     
     return div
 }
-
 
 
 //Render Player detail 
@@ -121,10 +125,11 @@ const renderGameDetail = (gamePlayDetail, filters, player) => {
     }
 } 
 
+//get random interger based on min and max
 const getRandomInterger =  (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
-
+//taken in integer and return string game choice
 const getGameChoice = (choiceInt) => {
     if (choiceInt === 0) {
         return 'Rock'
@@ -135,12 +140,13 @@ const getGameChoice = (choiceInt) => {
     }
 }
 
+//Update local storage adding uuid into detail
 const updateStore = (player, result, playerChoice, gameChoice) => {
     const id = uuidv4()
     gamePlayDetail.push({ id, player, result, playerChoice, gameChoice })
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
 }
-
+//get the result from playing RPS
 const getRPSResult = (player, gameChoice, playerChoice) => {
   
     if (playerChoice === gameChoice) {
@@ -177,6 +183,8 @@ const getRPSResult = (player, gameChoice, playerChoice) => {
     }
 }
 
+
+//Plays the game by determining game Choice and then get RPS result and render game detail
 const playGame = (player, playerChoice) => {
     rpsOutput.innerHTML = ''
     let gameChoice = getGameChoice(getRandomInterger(0, 2))
@@ -185,7 +193,6 @@ const playGame = (player, playerChoice) => {
     h1.textContent = result
     rpsOutput.appendChild(h1)
     renderGameDetail(gamePlayDetail, filters, player)
-
 }
 
 
