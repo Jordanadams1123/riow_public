@@ -10,32 +10,33 @@ const rpsOutput = document.getElementById('rps-output')
 const playerHistory = document.getElementById('game-history')
 const playerOutput = document.getElementById('player-output')
 const currentPlayer = document.getElementById('current-player')
+const gameReview = document.getElementById('game-review')
+
 
 //setup player as global variable 
-let player 
+let player
 
 //gets saved game detail from local storage
 let gamePlayDetail = getSavedGameDetail()
 
+//get saved game review by player from local storage
+let gameReviews = getSavedReviews()
+
 //if index.html is called from detail.html with player id, use this player for 
 //current player
-
 const linkedPlayer = location.hash.substring(1)
-console.log(linkedPlayer)
-if(!linkedPlayer){
+
+if (!linkedPlayer) {
     player = ''
 } else {
     player = linkedPlayer
-    const h2 = document.createElement('h2')
-    h2.textContent = `${player} is now playing`
-    currentPlayer.appendChild(h2)
-    renderGameDetail(gamePlayDetail, filters, player)
+    renderPageContent(player, gamePlayDetail, gameReviews, filters)
 }
 
 //listens for click on sissors img and if player is poulates 
 //calls playGame to start the game
 scissorsClick.addEventListener('click', function (e) {
-    if(player === '') {
+    if (player === '') {
         playerInputErr.textContent = 'HEY!!!! CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Scissors')
@@ -45,7 +46,7 @@ scissorsClick.addEventListener('click', function (e) {
 //listens for click on power img and if player is poulates 
 //calls playGame to start the game
 paperClick.addEventListener('click', function (e) {
-    if(player === '') {
+    if (player === '') {
         playerInputErr.textContent = 'HEY....CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Paper')
@@ -55,7 +56,7 @@ paperClick.addEventListener('click', function (e) {
 //listens for click on rock img and if player is poulates 
 //calls playGame to start the game
 rockClick.addEventListener('click', function (e) {
-    if(player === '') {
+    if (player === '') {
         playerInputErr.textContent = 'HEY....CAN YOU READ? Enter PLAYER NAME TO START'
     } else {
         playGame(player, 'Rock')
@@ -64,21 +65,17 @@ rockClick.addEventListener('click', function (e) {
 
 //listens for change to player name input and if player 
 //existing will display game detail
-playerName.addEventListener('change', function(e){
-    if(e.target.value === '') {
+playerName.addEventListener('change', function (e) {
+    if (e.target.value === '') {
         playerInputErr.textContent = `HEY....CAN YOU READ? Enter PLAYER NAME TO START!`
     } else {
         player = e.target.value.toLowerCase()
         e.target.value = ''
-        currentPlayer.innerHTML = ''
-        const h2 = document.createElement('h2')
-        h2.textContent = `${player} is now playing`
-        currentPlayer.appendChild(h2)
-        renderGameDetail(gamePlayDetail, filters, player)
+        renderPageContent(player, gamePlayDetail, gameReviews, filters)
     }
 })
 
 //clears player input error once user clicks back into the input field
-playerName.addEventListener('input', function(){
+playerName.addEventListener('input', function () {
     playerInputErr.innerHTML = ''
 })

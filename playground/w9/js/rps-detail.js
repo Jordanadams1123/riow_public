@@ -24,16 +24,13 @@ link.textContent = 'Return to Game'
 gameDetail.appendChild(link)
 
 //NOT Complete - determine which star the user clicked on update local store with review data
-document.getElementById('review').addEventListener('click', () => {
-    let reviewStars = document.getElementsByName('rate')
-    reviewStars.forEach(function (star) {
-        if (star.checked) {
-            console.log(star.value)
-            game.review = star.value
-            saveGamePlayDetail(games)
-        }
-    })
-})
-
-
-
+// document.getElementById('review').addEventListener('click', () => {
+//     let reviewStars = document.getElementsByName('rate')
+//     reviewStars.forEach(function (star) {
+//         if (star.checked) {
+//             console.log(star.value)
+//             game.review = star.value
+//             saveGamePlayDetail(games)
+//         }
+//     })
+// })

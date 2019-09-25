@@ -5,7 +5,18 @@ const filters = {
     byGame: ''
 }
 
-//get data from local storage
+//get data from local storage for game reviews
+const getSavedReviews = () => {
+    const gameReviewsJSON = localStorage.getItem('rps-review')
+    try {
+        return gameReviewsJSON ?  JSON.parse(gameReviewsJSON) : []
+    } catch (e){
+        return []
+    }  
+   
+}
+ 
+//get data from local storage from game play details
 const getSavedGameDetail = () => {
 
     const gamePlayDetailJSON = localStorage.getItem('rps')
@@ -16,25 +27,35 @@ const getSavedGameDetail = () => {
     }  
    
 }
-
-//Render Game filter results by filtered by Player
-const renderSearchDetail = (filterPlayer, filters) => {
-    playerOutput.innerHTML = ''
-    const filterGame = filterPlayer.filter((detail) => {
-        return detail.result.toLowerCase().includes(filter.byGame.toLowerCase()) 
-    })
-
-    if(filterGame.length === 0) {
-        gameSearch.textContent = 'No Games found'
-    } else {
-        filterGame.forEach((game) => {
-            const gameEntry = document.createElement('p')
-            gameEntry.textContent = `Player ${game.player} ${game.result} by selecting ${game.playerChoice}.`
-            playerOutput.appendChild(gameEntry)
-        })
-    }
+//create DOM for player review
+const createReviewDOM = (linktext) => {
+    gameReview.innerHTML = ''
+    const a = document.createElement('a')
+    const p = document.createElement('p')
+    a.setAttribute('href', 'review.html#'+ player)
+    p.textContent = linktext
+    a.appendChild(p)
+    return a
 
 }
+
+const showPlayerReview = (player, gameReviews ) => {
+    //search for player review
+    const review = gameReviews.find((review) => review.player === player)
+    let el
+    if (!review) {
+        //built DOM to ask for review
+        console.log('no review')
+        el = createReviewDOM('Like us?')
+    
+    } else {
+        //built DOM to thank for review
+        el = createReviewDOM('Thanks for your review')    
+    }
+    
+    gameReview.appendChild(el)
+}
+
 
 //remove game detail entry by id
 const removeGameEntry = (id) => {
@@ -49,6 +70,10 @@ const removeGameEntry = (id) => {
 //save chagnes to local storage
 const saveGamePlayDetail = (gamePlayDetail) => {
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
+}
+
+const saveGameReview = (gameReviews) => {
+    localStorage.setItem('rps-review', JSON.stringify(gameReviews))
 }
 
 //generate game play detail DOM element
@@ -80,24 +105,18 @@ const generateGameDOM = (game, index) => {
 //Create Player History DOM by filtering for statistics
 const createPlayerHistoryDOM = (filterPlayer, filters, player)=> {
     const div = document.createElement('div')
-    
     const h1 = document.createElement('h1')
     h1.textContent = `${player} game play history`
     div.appendChild(h1)
-    
+
     const h2 = document.createElement('h2')
     const totalGames = filterPlayer.length
-    const filterWins = filterPlayer.filter((game) => {
-        return game.result === 'Win'
-    })
-    const filterLoss = filterPlayer.filter((game) => {
-        return game.result === 'Loss'
-    })
+    const filterWins = filterPlayer.filter((game) => game.result === 'Win')
+    const filterLoss = filterPlayer.filter((game) => game.result === 'Loss')
     const totalWins = filterWins.length
     const totalLoss = filterLoss.length
     h2.textContent = `Total Games played: ${totalGames} <> Total Wins: ${totalWins} <> Total Loss: ${totalLoss}`
     div.appendChild(h2)
-    
     return div
 }
 
@@ -105,10 +124,7 @@ const createPlayerHistoryDOM = (filterPlayer, filters, player)=> {
 //Render Player detail 
 const renderGameDetail = (gamePlayDetail, filters, player) => {
     
-    const filterPlayer = gamePlayDetail.filter((detail) => {     
-        return detail.player === player
-    })
-    
+    const filterPlayer = gamePlayDetail.filter((detail) => detail.player === player)
 
     if(filterPlayer.length === 0) {
         playerHistory.textContent = 'No player game history found'
@@ -142,13 +158,13 @@ const getGameChoice = (choiceInt) => {
 
 //Update local storage adding uuid into detail
 const updateStore = (player, result, playerChoice, gameChoice) => {
+    const timestamp = moment().valueOf()
     const id = uuidv4()
-    gamePlayDetail.push({ id, player, result, playerChoice, gameChoice })
+    gamePlayDetail.push({ id, player, result, playerChoice, gameChoice, timestamp })
     localStorage.setItem('rps', JSON.stringify(gamePlayDetail))
 }
 //get the result from playing RPS
 const getRPSResult = (player, gameChoice, playerChoice) => {
-  
     if (playerChoice === gameChoice) {
         updateStore(player, 'Tie', playerChoice, gameChoice)
         return 'Tie'
@@ -195,32 +211,12 @@ const playGame = (player, playerChoice) => {
     renderGameDetail(gamePlayDetail, filters, player)
 }
 
-
-//Setup my querySelectors once, saves time, coding
-//const playerInput = document.querySelector('#select-player')
-//const playerOutput = document.querySelector('#player-output')
-//const gameSearch = document.querySelector('#game-search')
-
-//Eventlistener for user input on player 
-// playerInput.addEventListener('change', function(e){
-//     console.log('listening')
-//     filter.playerText = e.target.value
-//     renderPlayerDetail(gamePlayDetail, filter)
-//     e.target.value = ''
-// })
-
-//Filter by game after filter by player is done rendering
-//Building input dynamically. 
-// const displayGameFilter = function(filterPlayer, filter) {
-
-//     const gameFilter = document.createElement('input')
-//     gameFilter.setAttribute('id', 'game-filter')
-//     gameFilter.setAttribute('placeholder', 'Tie, Win or Loss')
-//     gameSearch.appendChild(gameFilter)
-//     gameSearch.addEventListener('change', function (e){
-//         filter.byGame = e.target.value
-//         renderSearchDetail(filterPlayer, filter)
-//         e.target.value = ''
-//     })
-    
-// }
+//Render Page Content for index with has and first load
+const renderPageContent = (player, gamePlayDetail, gameReviews, filters) => {
+    currentPlayer.innerHTML = ''
+    const h2 = document.createElement('h2')
+    h2.textContent = `${player} is now playing`
+    currentPlayer.appendChild(h2)
+    showPlayerReview(player, gameReviews)
+    renderGameDetail(gamePlayDetail, filters, player)
+}
